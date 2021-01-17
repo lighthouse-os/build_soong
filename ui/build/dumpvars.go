@@ -138,37 +138,49 @@ func dumpMakeVars(ctx Context, config Config, goals, vars []string, write_soong_
 // Variables to print out in the top banner
 var BannerVars = []string{
 	"PLATFORM_VERSION_CODENAME",
+	"LIGHTHOUSE_RELEASE",
 	"PLATFORM_VERSION",
 	"TARGET_PRODUCT",
 	"TARGET_BUILD_VARIANT",
 	"TARGET_BUILD_TYPE",
-	"TARGET_BUILD_APPS",
 	"TARGET_ARCH",
-	"TARGET_ARCH_VARIANT",
-	"TARGET_CPU_VARIANT",
-	"TARGET_2ND_ARCH",
-	"TARGET_2ND_ARCH_VARIANT",
-	"TARGET_2ND_CPU_VARIANT",
 	"HOST_ARCH",
-	"HOST_2ND_ARCH",
 	"HOST_OS",
-	"HOST_OS_EXTRA",
-	"HOST_CROSS_OS",
-	"HOST_CROSS_ARCH",
-	"HOST_CROSS_2ND_ARCH",
 	"HOST_BUILD_TYPE",
-	"BUILD_ID",
 	"OUT_DIR",
-	"AUX_OS_VARIANT_LIST",
-	"TARGET_BUILD_PDK",
-	"PDK_FUSION_PLATFORM_ZIP",
 	"PRODUCT_SOONG_NAMESPACES",
 }
 
 func Banner(make_vars map[string]string) string {
 	b := &bytes.Buffer{}
-
-	fmt.Fprintln(b, "============================================")
+	fmt.Fprintln(b, "")
+	fmt.Fprintln(b, "")
+	fmt.Fprintln(b, "								      , ")
+	fmt.Fprintln(b, "								   ,  . ")
+        fmt.Fprintln(b, "               ..          ,  .  . ")
+        fmt.Fprintln(b, "             .*oo*.     ,  .  .  . ")
+        fmt.Fprintln(b, "             ..**..   -  .  .  .  . ")
+        fmt.Fprintln(b, "            ..****.. 	 ,  .  .  . ")
+        fmt.Fprintln(b, "            .*oooo*.       ,  .  . ")
+		fmt.Fprintln(b, "	   		  *oooo*           ,  . ")
+		fmt.Fprintln(b, "	   		  *oooo*              , ")
+		fmt.Fprintln(b, "	   		  *oooo*                ")
+		fmt.Fprintln(b, "	   		  *oooo*                ")
+		fmt.Fprintln(b, "	   		  *oooo*                ")
+		fmt.Fprintln(b, "	   		  *oooo*                ")
+		fmt.Fprintln(b, "            *oo**oo*               ")
+		fmt.Fprintln(b, "	   	    *oooooooo*              ")
+		fmt.Fprintln(b, "	   	   *oooooooooo*             ")
+		fmt.Fprintln(b, "	   	  **.oooooooo.**            ")
+		fmt.Fprintln(b, "	   	  *.oooo**oooo.*            ")
+		fmt.Fprintln(b, "  ....*....*ooooooooo*....*....    ")
+		fmt.Fprintln(b, "	...*ooooooooooooooooo*...       ")
+		fmt.Fprintln(b, " .**ooooooooooooooooooooooooo**.   ")
+		fmt.Fprintln(b, ".*******************************.  ")
+		fmt.Fprintln(b, "")
+		fmt.Fprintln(b, "")
+		fmt.Fprintln(b, "")
+		fmt.Fprintln(b, "")
 	for _, name := range BannerVars {
 		if make_vars[name] != "" {
 			fmt.Fprintf(b, "%s=%s\n", name, make_vars[name])
