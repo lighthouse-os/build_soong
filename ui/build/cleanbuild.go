@@ -103,6 +103,7 @@ func installClean(ctx Context, config Config, what int) {
 		hostOut("vts-core"),
 		productOut("*.img"),
 		productOut("*.zip"),
+		productOut("*.zip.md5sum"),
 		productOut("android-info.txt"),
 		productOut("apex"),
 		productOut("kernel"),
@@ -131,7 +132,8 @@ func installClean(ctx Context, config Config, what int) {
 		productOut("installer"),
 		productOut("odm"),
 		productOut("sysloader"),
-		productOut("testcases"))
+		productOut("testcases"),
+		productOut("install"))
 }
 
 // Since products and build variants (unfortunately) shared the same
@@ -272,4 +274,13 @@ func cleanEmptyDirs(ctx Context, dir string) {
 		ctx.Fatalf("Failed to remove directory that is no longer installed (%q): %v", dir, err)
 	}
 	cleanEmptyDirs(ctx, filepath.Dir(dir))
+}
+
+// Remove everything relevant for a clean ota package
+func deviceClean(ctx Context, config Config, what int) {
+
+	productOutPath := config.ProductOut()
+
+	removeGlobs(ctx, productOutPath)
+	ctx.Println(productOutPath, "removed.")
 }
