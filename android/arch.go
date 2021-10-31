@@ -1544,6 +1544,7 @@ type archConfig struct {
 func getNdkAbisConfig() []archConfig {
 	return []archConfig{
 		{"arm", "armv7-a", "", []string{"armeabi-v7a"}},
+		{"arm", "armv7-a-neon", "kryo485", []string{"armeabi-v7a"}},
 		{"arm64", "armv8-a-branchprot", "", []string{"arm64-v8a"}},
 		{"x86", "", "", []string{"x86"}},
 		{"x86_64", "", "", []string{"x86_64"}},
@@ -1554,6 +1555,7 @@ func getNdkAbisConfig() []archConfig {
 func getAmlAbisConfig() []archConfig {
 	return []archConfig{
 		{"arm", "armv7-a-neon", "", []string{"armeabi-v7a"}},
+		{"arm64", "armv8-2a-dotprod", "kryo485", []string{"arm64-v8a"}},
 		{"arm64", "armv8-a", "", []string{"arm64-v8a"}},
 		{"x86", "", "", []string{"x86"}},
 		{"x86_64", "", "", []string{"x86_64"}},
