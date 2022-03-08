@@ -128,7 +128,7 @@ func NewConfig(ctx Context, args ...string) Config {
 	}
 
 	// Default matching ninja
-	ret.parallel = runtime.NumCPU() + 2
+	ret.parallel = runtime.NumCPU()
 	ret.keepGoing = 1
 
 	ret.totalRAM = detectTotalRAM(ctx)
@@ -137,7 +137,11 @@ func NewConfig(ctx Context, args ...string) Config {
 
 	// Make sure OUT_DIR is set appropriately
 	if outDir, ok := ret.environ.Get("OUT_DIR"); ok {
-		ret.environ.Set("OUT_DIR", filepath.Clean(outDir))
+		outDir := filepath.Clean(outDir)
+		if (!filepath.IsAbs(outDir)) {
+			outDir = filepath.Join(os.Getenv("TOP"), outDir)
+		}
+		ret.environ.Set("OUT_DIR", outDir)
 	} else {
 		outDir := "out"
 		if baseDir, ok := ret.environ.Get("OUT_DIR_COMMON_BASE"); ok {
@@ -146,6 +150,8 @@ func NewConfig(ctx Context, args ...string) Config {
 			} else {
 				outDir = filepath.Join(baseDir, filepath.Base(wd))
 			}
+		} else {
+			outDir = filepath.Join(os.Getenv("TOP"), outDir)
 		}
 		ret.environ.Set("OUT_DIR", outDir)
 	}

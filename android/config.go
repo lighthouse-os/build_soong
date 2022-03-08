@@ -1112,12 +1112,23 @@ func (c *deviceConfig) SystemExtPath() string {
 	return "system_ext"
 }
 
+func (c *deviceConfig) ProductOverlayPath() string {
+	if c.config.productVariables.ProductOverlayPath != nil {
+		return *c.config.productVariables.ProductOverlayPath
+	}
+	return c.ProductPath() + "/vendor_overlay/" + c.PlatformVndkVersion()
+}
+
 func (c *deviceConfig) BtConfigIncludeDir() string {
 	return String(c.config.productVariables.BtConfigIncludeDir)
 }
 
 func (c *deviceConfig) DeviceKernelHeaderDirs() []string {
 	return c.config.productVariables.DeviceKernelHeaders
+}
+
+func (c *deviceConfig) TargetSpecificHeaderPath() string {
+	return String(c.config.productVariables.TargetSpecificHeaderPath)
 }
 
 func (c *deviceConfig) SamplingPGO() bool {
